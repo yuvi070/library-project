@@ -2,11 +2,16 @@
 {% block content %}
 <h2>Available Books</h2>
 
+<form method="GET" class="mb-3">
+    <input type="text" name="search" placeholder="Search books..." class="form-control">
+</form>
+
 <table class="table table-bordered">
 <tr>
     <th>Title</th>
     <th>Author</th>
     <th>Quantity</th>
+    <th>Action</th>
 </tr>
 
 {% for book in books %}
@@ -14,8 +19,38 @@
     <td>{{book[1]}}</td>
     <td>{{book[2]}}</td>
     <td>{{book[3]}}</td>
+    <td>
+    <a href="/issue/{{book[0]}}" class="btn btn-success btn-sm">Issue</a>
+</td>
 </tr>
 {% endfor %}
 </table>
 
 {% endblock %}
+
+<hr>
+<h3>My Issued Books</h3>
+
+<table class="table table-bordered">
+<tr>
+    <th>Book</th>
+    <th>Date</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+{% for row in issued %}
+<tr>
+    <td>{{row[3]}}</td>
+    <td>{{row[4]}}</td>
+    <td>{{row[5]}}</td>
+    <td>
+        {% if row[5] == 'issued' %}
+        <a href="/return/{{row[0]}}" class="btn btn-warning btn-sm">Return</a>
+        {% else %}
+        Returned
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+</table>

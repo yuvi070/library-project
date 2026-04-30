@@ -3,11 +3,19 @@
 <head>
     <title>Library</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <nav class="navbar navbar-dark bg-dark px-3">
-    <span class="navbar-brand">📚 Digital Library</span>
+    <a class="navbar-brand d-flex align-items-center" href="#">
+    <img src="https://res.cloudinary.com/dev-uv/image/upload/fl_preserve_transparency/v1777549972/bg_mdltwt.jpg?_s=public-apps" 
+         alt="Logo" 
+         width="40" 
+         height="40" 
+         class="me-2 rounded-circle">
+    TKR Digital Library
+</a>
     <a href="/logout" class="btn btn-danger">Logout</a>
 </nav>
 

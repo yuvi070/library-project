@@ -1,34 +1,80 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h2>Admin Panel</h2>
 
-<form method="POST">
-    <input class="form-control mb-2" name="title" placeholder="Book Title">
-    <input class="form-control mb-2" name="author" placeholder="Author">
-    <input class="form-control mb-2" name="quantity" placeholder="Quantity">
-    <button class="btn btn-success">Add Book</button>
-</form>
+<h2 class="mb-4">👨‍💼 Admin Panel</h2>
 
-<hr>
+<!-- 🔹 ADD BOOK FORM -->
+<div class="card p-3 mb-4 shadow">
+    <h5>Add New Book</h5>
+    <form method="POST">
+        <input class="form-control mb-2" name="title" placeholder="Book Title" required>
+        <input class="form-control mb-2" name="author" placeholder="Author" required>
+        <input class="form-control mb-2" name="quantity" type="number" placeholder="Quantity" required>
+        <button class="btn btn-success">Add Book</button>
+    </form>
+</div>
 
-<table class="table table-bordered">
-<tr>
-    <th>Title</th>
-    <th>Author</th>
-    <th>Qty</th>
-    <th>Action</th>
-</tr>
+<!-- 🔹 BOOK LIST -->
+<div class="card p-3 mb-4 shadow">
+    <h5>📚 Available Books</h5>
 
-{% for book in books %}
-<tr>
-    <td>{{book[1]}}</td>
-    <td>{{book[2]}}</td>
-    <td>{{book[3]}}</td>
-    <td>
-        <a href="/delete/{{book[0]}}" class="btn btn-danger btn-sm">Delete</a>
-    </td>
-</tr>
-{% endfor %}
-</table>
+    <table class="table table-bordered table-striped mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Quantity</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{book[1]}}</td>
+                <td>{{book[2]}}</td>
+                <td>{{book[3]}}</td>
+                <td>
+                    <a href="/delete/{{book[0]}}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- 🔥 ISSUED BOOKS HISTORY -->
+<div class="card p-3 shadow">
+    <h5>📖 Issued Books History</h5>
+
+    <table class="table table-bordered table-striped mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>Student Name</th>
+                <th>Book Title</th>
+                <th>Issue Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for row in issued %}
+            <tr>
+                <td>{{row[1]}}</td>
+                <td>{{row[3]}}</td>
+                <td>{{row[4]}}</td>
+                <td>
+                    {% if row[5] == 'issued' %}
+                        <span class="badge bg-warning text-dark">Issued</span>
+                    {% else %}
+                        <span class="badge bg-success">Returned</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}
